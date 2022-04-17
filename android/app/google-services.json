@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "815667628944",
+    "project_id": "co-swipelab-battle",
+    "storage_bucket": "co-swipelab-battle.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815667628944:android:8b8c16f1ad8f7d71d24115",
+        "android_client_info": {
+          "package_name": "co.swipelab.battle.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "815667628944-j3ltuqsi8el8hk76vv1jl3o9670e1hoh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCo4hnZmk3kg53XHwv88dsofYldodYtIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "815667628944-j3ltuqsi8el8hk76vv1jl3o9670e1hoh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "815667628944-sa0scbscc6v17nblt4ts3l5spao078rt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "co.swipelab.battle.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
