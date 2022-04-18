@@ -4,9 +4,10 @@ import 'package:app/widgets/splash.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  final init = App.initProduction();
   runApp(
     FutureBuilder(
-      future: App.instance.init(),
+      future: init,
       builder: (context, data) => data.connectionState == ConnectionState.done
           ? const AppView()
           : const Splash('Loading...'),
@@ -20,7 +21,7 @@ class AppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Battle',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

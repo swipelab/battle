@@ -1,5 +1,5 @@
 import 'package:app/app.dart';
-import 'package:app/pages/lobby/lobby_page.dart';
+import 'package:app/pages/lobby_list/lobby_list_page.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -12,8 +12,8 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: TextButton(
-          child: Text('Lobby'),
-          onPressed: () => LobbyPage().open(),
+          child: Text('Play Battleship'),
+          onPressed: () => LobbyListPage().open(),
         ),
       ),
     );

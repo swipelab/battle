@@ -36,20 +36,15 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^1.14.1
   stated: 1.2.2
+  cloud_firestore: ^3.1.12
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^1.0.0
-
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+  flutter_launcher_icons:
+    git:
+      url: https://github.com/dirkbo/flutter_launcher_icons
 
 # The following section is specific to Flutter.
 flutter:
@@ -89,3 +84,11 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_icons:
+  android: true
+  ios: true
+  macos: true
+  remove_alpha_ios: true
+  image_path: "assets/battleship.png"
+  adaptive_icon_background: "#FFFFFF"

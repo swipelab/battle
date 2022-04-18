@@ -3,10 +3,12 @@ import 'package:app/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:stated/stated.dart';
 
-class App with Resolver, AsyncInit {
+class App {
   late Store _store;
 
-  static App instance = App.production();
+  static App? _instance;
+
+  static void back() => get<History>().popRoute();
 
   App.production() {
     WidgetsFlutterBinding.ensureInitialized();
@@ -15,15 +17,14 @@ class App with Resolver, AsyncInit {
       ..addLazy((e) async => History(HomePage()));
   }
 
-  @override
-  Future<T> resolve<T>() => _store.resolve<T>();
+  static Future<void> initProduction() {
+    _instance = App.production();
+    return _instance!._store.init();
+  }
 
-  @override
-  Future<void> init() => _store.init();
+  static T get<T>() => _instance!._store.get<T>();
 
-  static T get<T>() => instance._store.get<T>();
-
-  static open(Page page) => instance._store.get<History>().openPage(page);
+  static open(Page page) => _instance!._store.get<History>().openPage(page);
 }
 
 extension PageExtension<T> on Page<T> {
