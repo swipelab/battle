@@ -1,3 +1,4 @@
+import 'package:app/widgets/safe.dart';
 import 'package:flutter/material.dart';
 
 class LobbyNewPage extends Page<void> {
@@ -17,9 +18,14 @@ class LobbyNewView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text('New Lobby'),
+    return Safe(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('New Lobby'),
+        ),
+        body: Center(
+          child: Text('Settings'),
+        ),
       ),
     );
   }

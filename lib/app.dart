@@ -13,7 +13,7 @@ class App {
   App.production() {
     WidgetsFlutterBinding.ensureInitialized();
     _store = Store()
-      ..addLazy(FirebaseService.create)
+      ..addLazy(Firebase.create)
       ..addLazy((e) async => History(HomePage()));
   }
 

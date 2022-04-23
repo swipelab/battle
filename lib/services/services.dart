@@ -1,2 +1,2 @@
-export 'firebase_service.dart';
+export 'firebase.dart';
 export 'history.dart';
