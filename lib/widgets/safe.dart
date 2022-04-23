@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Safe extends StatelessWidget {
@@ -13,7 +14,7 @@ class Safe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shouldPad = !Platform.isAndroid || !Platform.isIOS;
+    final shouldPad = kIsWeb || !Platform.isAndroid || !Platform.isIOS;
     var child = _child ?? SizedBox.shrink();
 
     if (shouldPad) {

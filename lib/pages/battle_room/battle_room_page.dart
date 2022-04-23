@@ -1,3 +1,4 @@
+import 'package:app/app.dart';
 import 'package:app/pages/battle_room/battle_room_bloc.dart';
 import 'package:app/pages/battle_room/battle_room_state.dart';
 import 'package:app/pages/battle_room/battle_room_view.dart';
@@ -14,10 +15,13 @@ class BattleRoomPage extends Page<void> {
   @override
   Route<void> createRoute(BuildContext context) {
     return MaterialPageRoute(
-      builder: (context) => StatedBuilder<BattleRoomState>(
-        create: (_) => BattleRoomBloc(roomId: roomId),
-        builder: (context, state, _) => BattleRoomView(
-          state: state,
+      builder: (context) => ListenableBuilder<BattleRoomBloc>(
+        create: (_) => BattleRoomBloc(
+          firebase: App.get(),
+          roomId: roomId,
+        ),
+        builder: (context, bloc, _) => BattleRoomView(
+          state: bloc.value,
         ),
       ),
       settings: this,

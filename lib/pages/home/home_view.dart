@@ -10,10 +10,17 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: TextButton(
-          child: Text('Play Battleship'),
-          onPressed: () => LobbyListPage().open(),
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          children: [
+            Image.asset('assets/battleship.png'),
+            SizedBox(height: 24),
+            TextButton(
+              child: Text('Play Battleship'),
+              onPressed: () => LobbyListPage().open(),
+            ),
+          ],
         ),
       ),
     );

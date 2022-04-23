@@ -11,7 +11,6 @@ class App {
   static void back() => get<History>().popRoute();
 
   App.production() {
-    WidgetsFlutterBinding.ensureInitialized();
     _store = Store()
       ..addLazy(Firebase.create)
       ..addLazy((e) async => History(HomePage()));
