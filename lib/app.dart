@@ -1,3 +1,4 @@
+import 'package:app/pages/battle/battle_page.dart';
 import 'package:app/pages/home/home_page.dart';
 import 'package:app/services/services.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,9 @@ class App {
   App.production() {
     _store = Store()
       ..addLazy(Firebase.create)
-      ..addLazy((e) async => History(HomePage()));
+      ..addLazy((e) async => History(
+            HomePage(),
+          ));
   }
 
   static Future<void> initProduction() {

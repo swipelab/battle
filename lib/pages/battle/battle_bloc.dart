@@ -8,7 +8,7 @@ class BattleBloc extends Stated<BattleState> {
   BattleBloc({
     required this.roomId,
     this.boardSize = 10,
-    this.width = 800,
+    this.width = 600,
     this.height = 600,
   });
 
@@ -16,12 +16,27 @@ class BattleBloc extends Stated<BattleState> {
   final int boardSize;
   final double width;
   final double height;
+  final List<Tile> tiles = [];
+  final TransformationController _transformController =
+      TransformationController();
 
-  void _tapAt(Offset position) {}
+  double get size => min(width, height);
+
+  double get unitSize => size / boardSize;
+
+  void _tapAt(Offset viewportPoint) {
+    final scenePoint = _transformController.toScene(viewportPoint);
+    final position = Position(x: scenePoint.dx, y: scenePoint.dy);
+    tiles.add(Tile(position: position));
+    if (tiles.length > 20) {
+      tiles.removeRange(0, tiles.length - 20);
+    }
+    setState();
+  }
 
   Matrix4 get _isometric {
     return Matrix4.identity()
-      ..translate(width / 2, 0)
+      //..translate(width / 2, 0)
       ..scale(0.93, 1)
       ..rotateX(45 * pi / 180)
       ..rotateZ(45 * pi / 180);
@@ -29,15 +44,15 @@ class BattleBloc extends Stated<BattleState> {
 
   @override
   BattleState build() {
-    final size = min(width, height);
-
     return BattleState(
       width: width,
       height: height,
       tapAt: _tapAt,
       boardSize: boardSize,
-      unitSize: size / boardSize,
+      unitSize: unitSize,
       isometric: _isometric,
+      tiles: tiles,
+      transformController: _transformController,
     );
   }
 }

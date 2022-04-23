@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:app/pages/battle/battle_state.dart';
 import 'package:app/widgets/safe.dart';
 import 'package:flutter/material.dart';
@@ -22,14 +20,22 @@ class BattleView extends StatelessWidget {
         body: Center(
           child: FittedBox(
             fit: BoxFit.scaleDown,
-            child: SizedBox(
-              width: state.width,
-              height: state.height,
-              child: GestureDetector(
-                onTapUp: (d) => state.tapAt(d.localPosition),
-                child: CustomPaint(
-                  painter: BoardPainter(
-                    isometric: state.isometric,
+            child: SizedBox.square(
+              dimension: 600,
+              child: Transform(
+                transform: state.isometric,
+                alignment: FractionalOffset.center,
+                filterQuality: FilterQuality.high,
+                child: Listener(
+                  onPointerMove: (d) => state.tapAt(d.localPosition),
+                  //onPointerMove: (d) => state.tapAt(d.localPosition),
+                  child: InteractiveViewer(
+                    transformationController: state.transformController,
+                    child: CustomPaint(
+                      painter: BoardPainter(
+                        tiles: state.tiles,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -43,10 +49,10 @@ class BattleView extends StatelessWidget {
 
 class BoardPainter extends CustomPainter {
   BoardPainter({
-    required this.isometric,
+    required this.tiles,
   });
 
-  final Matrix4 isometric;
+  final List<Tile> tiles;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -55,11 +61,9 @@ class BoardPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 
-    final pixels = min(size.width, size.height);
+    const pixels = 600.0;
     const boardSize = 10;
-    final boxSize = pixels / boardSize;
-
-    canvas.transform(isometric.storage);
+    const boxSize = pixels / boardSize;
 
     for (var l = 0; l <= 10; l++) {
       canvas.drawLine(
@@ -70,6 +74,17 @@ class BoardPainter extends CustomPainter {
       canvas.drawLine(
         Offset(0, l * boxSize),
         Offset(pixels, l * boxSize),
+        line,
+      );
+    }
+
+    for (var e in tiles) {
+      canvas.drawCircle(
+        Offset(
+          e.position.x,
+          e.position.y,
+        ),
+        boxSize / 2,
         line,
       );
     }

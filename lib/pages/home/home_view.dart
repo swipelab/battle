@@ -1,4 +1,5 @@
 import 'package:app/app.dart';
+import 'package:app/pages/battle/battle_page.dart';
 import 'package:app/pages/lobby_list/lobby_list_page.dart';
 import 'package:flutter/material.dart';
 
@@ -12,15 +13,15 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(24.0),
-        child: Column(
-          children: [
-            Image.asset('assets/battleship.png'),
-            SizedBox(height: 24),
-            TextButton(
-              child: Text('Play Battleship'),
-              onPressed: () => LobbyListPage().open(),
-            ),
-          ],
+        child: InkWell(
+          onTap: () => BattlePage(roomId: 'SZVsTO0FAsGO0VQt7W4H').open(),
+          child: Column(
+            children: [
+              Image.asset('assets/battleship.png'),
+              SizedBox(height: 24),
+              Text('Play Battleship'),
+            ],
+          ),
         ),
       ),
     );
