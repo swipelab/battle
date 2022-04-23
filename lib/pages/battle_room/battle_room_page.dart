@@ -1,6 +1,5 @@
 import 'package:app/app.dart';
 import 'package:app/pages/battle_room/battle_room_bloc.dart';
-import 'package:app/pages/battle_room/battle_room_state.dart';
 import 'package:app/pages/battle_room/battle_room_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stated/stated.dart';
