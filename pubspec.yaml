@@ -35,7 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   firebase_core: ^1.14.1
-  stated: 1.2.2
+  stated: 1.2.5
   cloud_firestore: ^3.1.12
 
 dev_dependencies:

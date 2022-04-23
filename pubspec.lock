@@ -239,7 +239,7 @@ packages:
       name: stated
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.2"
+    version: "1.2.5"
   stream_channel:
     dependency: transitive
     description:

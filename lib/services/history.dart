@@ -1,8 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:stated/stated.dart';
 
 class History extends RouterDelegate
-    with Disposer, Notifier, PopNavigatorRouterDelegateMixin {
+    with ChangeNotifier, PopNavigatorRouterDelegateMixin {
   final GlobalKey<NavigatorState> _navigatorKey;
 
   History(Page root)

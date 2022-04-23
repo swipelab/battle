@@ -3,7 +3,7 @@ import 'package:app/pages/lobby_list/lobby_list_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:stated/stated.dart';
 
-class LobbyListBloc extends Stated<LobbyListState> {
+class LobbyListBloc extends Stated<LobbyListState> with Disposer {
   LobbyListBloc() {
     final lobbies = FirebaseFirestore.instance
         .collection('lobby')
@@ -27,7 +27,7 @@ class LobbyListBloc extends Stated<LobbyListState> {
 
     final subscription = lobbies.listen((e) {
       _lobbies = e.docs.map((e) => e.data()).toList();
-      notifyListeners();
+      setState();
     });
 
     addDispose(() => subscription.cancel());
