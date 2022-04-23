@@ -1,6 +1,5 @@
 import 'package:app/app.dart';
 import 'package:app/pages/battle/battle_page.dart';
-import 'package:app/pages/lobby_list/lobby_list_page.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {

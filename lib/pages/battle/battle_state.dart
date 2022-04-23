@@ -9,10 +9,7 @@ class Tile {
 }
 
 class Position {
-  Position({
-    required this.x,
-    required this.y,
-  });
+  Position(this.x, this.y);
 
   final double x;
   final double y;
@@ -27,7 +24,6 @@ class BattleState {
     required this.boardSize,
     required this.unitSize,
     required this.tiles,
-    required this.transformController,
   });
 
   final int boardSize;
@@ -37,5 +33,4 @@ class BattleState {
   final Matrix4 isometric;
   final void Function(Offset) tapAt;
   final List<Tile> tiles;
-  final TransformationController transformController;
 }

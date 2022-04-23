@@ -17,17 +17,19 @@ class BattleBloc extends Stated<BattleState> {
   final double width;
   final double height;
   final List<Tile> tiles = [];
-  final TransformationController _transformController =
-      TransformationController();
 
   double get size => min(width, height);
 
   double get unitSize => size / boardSize;
 
-  void _tapAt(Offset viewportPoint) {
-    final scenePoint = _transformController.toScene(viewportPoint);
-    final position = Position(x: scenePoint.dx, y: scenePoint.dy);
-    tiles.add(Tile(position: position));
+  void _tapAt(Offset at) {
+    final half = unitSize / 2;
+    final x = ((at.dx - half) / unitSize).round().toDouble();
+    final y = ((at.dy - half) / unitSize).round().toDouble();
+    if (x < 0 || x >= boardSize || y < 0 || y >= boardSize) {
+      return;
+    }
+    tiles.add(Tile(position: Position(x, y)));
     if (tiles.length > 20) {
       tiles.removeRange(0, tiles.length - 20);
     }
@@ -36,9 +38,9 @@ class BattleBloc extends Stated<BattleState> {
 
   Matrix4 get _isometric {
     return Matrix4.identity()
-      //..translate(width / 2, 0)
+      ..setEntry(3, 2, 0.0005)
       ..scale(0.93, 1)
-      ..rotateX(45 * pi / 180)
+      ..rotateX(-45 * pi / 180)
       ..rotateZ(45 * pi / 180);
   }
 
@@ -52,7 +54,6 @@ class BattleBloc extends Stated<BattleState> {
       unitSize: unitSize,
       isometric: _isometric,
       tiles: tiles,
-      transformController: _transformController,
     );
   }
 }

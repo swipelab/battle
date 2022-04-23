@@ -15,6 +15,7 @@ class BattlePage extends Page<void> {
   Route<void> createRoute(BuildContext context) {
     return MaterialPageRoute(
       builder: (context) => StatedBuilder<BattleState>(
+        key: ObjectKey(roomId),
         create: (context) => BattleBloc(
           roomId: roomId,
         ),

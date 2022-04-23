@@ -1,4 +1,3 @@
-import 'package:app/pages/battle/battle_page.dart';
 import 'package:app/pages/home/home_page.dart';
 import 'package:app/services/services.dart';
 import 'package:flutter/material.dart';
