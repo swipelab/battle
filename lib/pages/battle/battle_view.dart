@@ -32,7 +32,7 @@ class BattleView extends StatelessWidget {
                     color: Color(0x242A6076),
                     child: CustomPaint(
                       painter: BoardPainter(
-                        tiles: state.tiles,
+                        state: state,
                       ),
                     ),
                   ),
@@ -48,10 +48,10 @@ class BattleView extends StatelessWidget {
 
 class BoardPainter extends CustomPainter {
   BoardPainter({
-    required this.tiles,
+    required this.state,
   });
 
-  final List<Tile> tiles;
+  final BattleState state;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -60,31 +60,46 @@ class BoardPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 
-    const pixels = 600.0;
-    const boardSize = 10;
-    const boxSize = pixels / boardSize;
-    const half = boxSize / 2;
+    final shipLine = Paint()
+      ..color = Color(0xFFEFE9E9)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
+    final shipFill = Paint()
+      ..color = Color(0xFFF18B8B)
+      ..style = PaintingStyle.fill;
+
+    final half = state.unitSize / 2;
 
     for (var l = 0; l <= 10; l++) {
       canvas.drawLine(
-        Offset(l * boxSize, 0),
-        Offset(l * boxSize, pixels),
+        Offset(l * state.unitSize, 0),
+        Offset(l * state.unitSize, state.size),
         line,
       );
       canvas.drawLine(
-        Offset(0, l * boxSize),
-        Offset(pixels, l * boxSize),
+        Offset(0, l * state.unitSize),
+        Offset(state.size, l * state.unitSize),
         line,
       );
     }
 
-    for (var e in tiles) {
+    for (var e in state.ships) {
+      final rect = Rect.fromLTRB(
+          e.head.x * state.unitSize,
+          e.head.y * state.unitSize,
+          (e.tail.x + 1) * state.unitSize,
+          (e.tail.y + 1) * state.unitSize);
+      canvas.drawRect(rect, shipFill);
+      canvas.drawRect(rect, shipLine);
+    }
+
+    for (var e in state.tiles) {
       canvas.drawCircle(
         Offset(
-          e.position.x * boxSize + half,
-          e.position.y * boxSize + half,
+          e.position.x * state.unitSize + half,
+          e.position.y * state.unitSize + half,
         ),
-        boxSize / 2,
+        half,
         line,
       );
     }

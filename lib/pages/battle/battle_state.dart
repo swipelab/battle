@@ -8,6 +8,16 @@ class Tile {
   final Position position;
 }
 
+class Ship {
+  Ship({
+    required this.head,
+    required this.tail,
+  });
+
+  final Position head;
+  final Position tail;
+}
+
 class Position {
   Position(this.x, this.y);
 
@@ -17,20 +27,24 @@ class Position {
 
 class BattleState {
   BattleState({
+    required this.size,
     required this.width,
     required this.height,
     required this.tapAt,
     required this.isometric,
-    required this.boardSize,
+    required this.grid,
     required this.unitSize,
     required this.tiles,
+    required this.ships,
   });
 
-  final int boardSize;
+  final int grid;
   final double unitSize;
+  final double size;
   final double width;
   final double height;
   final Matrix4 isometric;
   final void Function(Offset) tapAt;
   final List<Tile> tiles;
+  final List<Ship> ships;
 }

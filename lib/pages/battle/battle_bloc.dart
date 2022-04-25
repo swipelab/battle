@@ -17,6 +17,12 @@ class BattleBloc extends Stated<BattleState> {
   final double width;
   final double height;
   final List<Tile> tiles = [];
+  final List<Ship> ships = [
+    Ship(head: Position(0, 0), tail: Position(0, 0)),
+    Ship(head: Position(3, 0), tail: Position(4, 0)),
+    Ship(head: Position(0, 3), tail: Position(0, 5)),
+    Ship(head: Position(6, 6), tail: Position(6, 9)),
+  ];
 
   double get size => min(width, height);
 
@@ -47,13 +53,15 @@ class BattleBloc extends Stated<BattleState> {
   @override
   BattleState build() {
     return BattleState(
+      size: size,
       width: width,
       height: height,
       tapAt: _tapAt,
-      boardSize: boardSize,
+      grid: boardSize,
       unitSize: unitSize,
       isometric: _isometric,
       tiles: tiles,
+      ships: ships,
     );
   }
 }
