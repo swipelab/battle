@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:app/pages/battle/battle_state.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:stated/stated.dart';
 
 class BattleBloc extends Stated<BattleState> {
@@ -43,9 +44,13 @@ class BattleBloc extends Stated<BattleState> {
   }
 
   Matrix4 get _isometric {
-    return Matrix4.identity()
+    final _matrix = Matrix4.identity();
+    if (kIsWeb) {
+      return _matrix;
+    }
+    return _matrix
       ..setEntry(3, 2, 0.0005)
-      ..scale(0.93, 1)
+      ..scale(0.93, 1.0)
       ..rotateX(-45 * pi / 180)
       ..rotateZ(45 * pi / 180);
   }

@@ -1,5 +1,6 @@
 import 'package:app/pages/battle/battle_state.dart';
 import 'package:app/widgets/safe.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class BattleView extends StatelessWidget {
@@ -18,25 +19,31 @@ class BattleView extends StatelessWidget {
           title: Text('Game in progress'),
         ),
         body: Center(
-          child: Transform(
-            transform: state.isometric,
-            alignment: FractionalOffset.center,
-            filterQuality: FilterQuality.high,
-            child: GestureDetector(
-              onTapDown: (d) => state.tapAt(d.localPosition),
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: SizedBox.square(
-                  dimension: 600,
-                  child: Container(
-                    color: Color(0x242A6076),
-                    child: CustomPaint(
-                      painter: BoardPainter(
-                        state: state,
-                      ),
-                    ),
-                  ),
+          child: kIsWeb
+              ? _buildInteractiveBoard()
+              : Transform(
+                  transform: state.isometric,
+                  alignment: FractionalOffset.center,
+                  filterQuality: FilterQuality.high,
+                  child: _buildInteractiveBoard(),
                 ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInteractiveBoard() {
+    return GestureDetector(
+      onTapDown: (d) => state.tapAt(d.localPosition),
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: SizedBox.square(
+          dimension: 600,
+          child: Container(
+            color: Color(0x242A6076),
+            child: CustomPaint(
+              painter: BoardPainter(
+                state: state,
               ),
             ),
           ),
@@ -80,6 +87,55 @@ class BoardPainter extends CustomPainter {
         Offset(0, l * state.unitSize),
         Offset(state.size, l * state.unitSize),
         line,
+      );
+    }
+
+    final letter = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+    final number = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'X'];
+
+    for (var i = 0; i < letter.length; i++) {
+      final tl = TextSpan(
+        text: letter[i],
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      );
+      final tlp = TextPainter(
+        text: tl,
+        textAlign: TextAlign.center,
+        textDirection: TextDirection.ltr,
+      );
+      tlp.layout();
+      tlp.paint(
+        canvas,
+        Offset(
+          i * state.unitSize + half - tlp.width / 2,
+          -half - (tlp.height / 2),
+        ),
+      );
+
+      final tn = TextSpan(
+        text: number[i],
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      );
+      final tnp = TextPainter(
+        text: tn,
+        textAlign: TextAlign.center,
+        textDirection: TextDirection.ltr,
+      );
+      tnp.layout();
+      tnp.paint(
+        canvas,
+        Offset(
+          -half - tnp.width / 2,
+          i * state.unitSize + half - (tnp.height / 2),
+        ),
       );
     }
 

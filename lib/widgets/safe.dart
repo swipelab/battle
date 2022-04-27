@@ -14,7 +14,11 @@ class Safe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shouldPad = kIsWeb || !Platform.isAndroid || !Platform.isIOS;
+    if (kIsWeb) {
+      return _child ?? SizedBox.shrink();
+    }
+
+    final shouldPad = !Platform.isAndroid || !Platform.isIOS;
     var child = _child ?? SizedBox.shrink();
 
     if (shouldPad) {
